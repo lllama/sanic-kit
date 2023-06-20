@@ -1,0 +1,389 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Handlers" href="handlers.html" /><link rel="prev" title="SanicKit" href="index.html" />
+
+    <!-- Generated with Sphinx 7.0.1 and Furo 2023.05.20 -->
+        <title>Routing - SanicKit documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=e6660623a769aa55fea372102b9bf3151b292993" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="index.html"><div class="brand">SanicKit  documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
+  
+  
+  <span class="sidebar-brand-text">SanicKit  documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul class="current">
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Routing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="handlers.html">Handlers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="templates.html">Templates</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section id="routing">
+<h1>Routing<a class="headerlink" href="#routing" title="Permalink to this heading">#</a></h1>
+<p>SanicKit copies SvelteKit’s is <em>filesystem-based router</em>. The paths of your codebase define the routes of your app:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">src/routes</span></code> is the root route</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">src/routes/about</span></code> creates an <code class="docutils literal notranslate"><span class="pre">/about</span></code>route</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">src/routes/blog/[slug]</span></code> creates a route with a <em>parameter</em>, <code class="docutils literal notranslate"><span class="pre">slug</span></code>, that can be used to load data dynamically when a user requests a page like <code class="docutils literal notranslate"><span class="pre">/blog/hello-world</span></code></p></li>
+</ul>
+<p>Each route directory contains one or more <em>route files</em>, which can be identified by their <code class="docutils literal notranslate"><span class="pre">+</span></code> prefix.</p>
+<section id="page-sanic">
+<h2>+page.sanic<a class="headerlink" href="#page-sanic" title="Permalink to this heading">#</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">+page.sanic</span></code> file defines a page of your app. The file is a jinja template that will be included in your app’s layout.</p>
+<p>src/routes/+page.sanic</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>Hello and welcome to my site!<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;/about&quot;</span><span class="p">&gt;</span>About my site<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<p>src/routes/about/+page.sanic</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>About this site<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>TODO...<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;/&quot;</span><span class="p">&gt;</span>Home<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<p>src/routes/blog/[slug]/+page.sanic</p>
+<p>Sometimes you will need to load some data to include in your template. Here the path contains the <code class="docutils literal notranslate"><span class="pre">[slug]</span></code> component which will be passed into your handler code. The handler code itself is included in a <code class="docutils literal notranslate"><span class="pre">&lt;handler&gt;</span></code> tag as shown below:</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">handler</span><span class="p">&gt;</span>
+import some_orm
+entry = some_orm.get(slug)
+<span class="p">&lt;/</span><span class="nt">handler</span><span class="p">&gt;</span>
+    
+<span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>{{entry.title}}<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>{{entry.content}}<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<p>Any variables defined in your handler code will be passed to your template as part of the context. Here we defined the <code class="docutils literal notranslate"><span class="pre">entry</span></code> variable which we use to get at the blog entry’s <code class="docutils literal notranslate"><span class="pre">title</span></code> and <code class="docutils literal notranslate"><span class="pre">content</span></code> attributes.</p>
+</section>
+<section id="server-py">
+<h2>+server.py<a class="headerlink" href="#server-py" title="Permalink to this heading">#</a></h2>
+<p>The +page.sanic file handles any GET requests made to the server. To handle other HTTP methods, create a server.py file and add functions named after the method you want to handle. E.g.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">async</span> <span class="k">def</span> <span class="nf">POST</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+   <span class="o">...</span>
+</pre></div>
+</div>
+<p>The above code will then handle any POST requests sent to the application.</p>
+</section>
+<section id="layout">
+<h2>+layout<a class="headerlink" href="#layout" title="Permalink to this heading">#</a></h2>
+<p>So far, we’ve treated pages as entirely standalone components — upon navigation, the existing <code class="docutils literal notranslate"><span class="pre">+page.svelte</span></code> component will be destroyed, and a new one will take its place.</p>
+<p>But in many apps, there are elements that should be visible on <em>every</em> page, such as top-level navigation or a footer. Instead of repeating them in every <code class="docutils literal notranslate"><span class="pre">+page.sanic</span></code>, we can put them in <em>layouts</em>.</p>
+<section id="layout-html">
+<h3>+layout.html<a class="headerlink" href="#layout-html" title="Permalink to this heading">#</a></h3>
+<p>To create a layout that applies to every page, make a file called <code class="docutils literal notranslate"><span class="pre">src/routes/+layout.html</span></code>. The default layout that SanicKit uses is:</p>
+<p>…but we can add whatever markup, styles and behaviour we want. The only requirement is that the component includes a <code class="docutils literal notranslate"><span class="pre">{%</span> <span class="pre">block</span> <span class="pre">…</span> <span class="pre">%}</span></code> for the page content. For example, let’s add a nav bar:</p>
+<p>src/routes/+layout.sanic</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">nav</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;/&quot;</span><span class="p">&gt;</span>Home<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;/about&quot;</span><span class="p">&gt;</span>About<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;/settings&quot;</span><span class="p">&gt;</span>Settings<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">nav</span><span class="p">&gt;</span>
+
+{% block main %}
+{% endblock %}
+</pre></div>
+</div>
+<p>If we create pages for <code class="docutils literal notranslate"><span class="pre">/</span></code>, <code class="docutils literal notranslate"><span class="pre">/about</span></code> and <code class="docutils literal notranslate"><span class="pre">/settings</span></code>…</p>
+<p>src/routes/+page.sanic</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;h1&gt;Home&lt;/h1&gt;
+</pre></div>
+</div>
+<p>src/routes/about/+page.sanic</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;h1&gt;About&lt;/h1&gt;
+</pre></div>
+</div>
+<p>src/routes/settings/+page.sanic</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;h1&gt;Settings&lt;/h1&gt;
+</pre></div>
+</div>
+<p>…the nav will always be visible, and clicking between the three pages will only result in the <code class="docutils literal notranslate"><span class="pre">&lt;h1&gt;</span></code> being replaced.</p>
+<p>Layouts can be <em>nested</em>. Suppose we don’t just have a single <code class="docutils literal notranslate"><span class="pre">/settings</span></code> page, but instead have nested pages like <code class="docutils literal notranslate"><span class="pre">/settings/profile</span></code>and <code class="docutils literal notranslate"><span class="pre">/settings/notifications</span></code> with a shared submenu (for a real-life example, see <a class="reference external" href="https://github.com/settings">github.com/settings</a>).</p>
+<p>We can create a layout that only applies to pages below <code class="docutils literal notranslate"><span class="pre">/settings</span></code> (while inheriting the root layout with the top-level nav):</p>
+<p>src/routes/settings/+layout.html</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>Settings<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;submenu&quot;</span><span class="p">&gt;</span>
+    {% for section in data.sections %}
+        <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;/settings/{{section.slug}}&quot;</span><span class="p">&gt;</span>{{section.title}}<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+    {% endfor %}
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+
+{% block subpage %}
+{% endblock %}
+</pre></div>
+</div>
+<p>By default, each layout inherits the layout above it.</p>
+</section>
+<section id="content-negotiation">
+<h3>Content negotiation<a class="headerlink" href="#content-negotiation" title="Permalink to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">+server.py</span></code> files can be placed in the same directory as <code class="docutils literal notranslate"><span class="pre">+page</span></code> files, allowing the same route to be either a page or an API endpoint. To determine which, SanicKit applies the following rules:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/</span> <span class="pre">PUT</span></code>/<code class="docutils literal notranslate"><span class="pre">PATCH</span></code>/<code class="docutils literal notranslate"><span class="pre">DELETE</span></code>/<code class="docutils literal notranslate"><span class="pre">OPTIONS</span></code> requests are always handled by <code class="docutils literal notranslate"><span class="pre">+server.py</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">GET</span></code> requests are treated as page requests</p></li>
+</ul>
+</section>
+<section id="other-files">
+<h3>Other files<a class="headerlink" href="#other-files" title="Permalink to this heading">#</a></h3>
+<p>All other html files will be treated as jinja templates and can be used with the standard <code class="docutils literal notranslate"><span class="pre">import</span></code> and <code class="docutils literal notranslate"><span class="pre">include</span></code> tags.</p>
+<p>Any other <code class="docutils literal notranslate"><span class="pre">py</span></code> files can be used to include utility or other functions and can be included using relative imports. Any python code that is used in multiple routes should be put in the <code class="docutils literal notranslate"><span class="pre">lib</span></code> directory.</p>
+</section>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="handlers.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Handlers</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="index.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Home</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2023, Felix Ingram
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Routing</a><ul>
+<li><a class="reference internal" href="#page-sanic">+page.sanic</a></li>
+<li><a class="reference internal" href="#server-py">+server.py</a></li>
+<li><a class="reference internal" href="#layout">+layout</a><ul>
+<li><a class="reference internal" href="#layout-html">+layout.html</a></li>
+<li><a class="reference internal" href="#content-negotiation">Content negotiation</a></li>
+<li><a class="reference internal" href="#other-files">Other files</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/scripts/furo.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    </body>
+</html>
